@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="helpers/layout::head"> </head>
+
+  <body style="overflow-x: hidden">
+    <nav th:replace="helpers/layout::menu"></nav>
+    <div class="row justify-content-center my-4">
+      <div class="col-md-10">
+        <div class="row">
+          <div class="col-md-3">
+            <div class="card">
+              <div class="card-header text-center">Registro de Medicamento</div>
+
+              <div class="card-body">
+                <form
+                  th:action="@{/medicamentos}"
+                  method="post"
+                  th:object="${medicamentoNew}"
+                >
+                  <div class="form-group">
+                    <label for="nombre">Ingrese nombre :</label>
+                    <input
+                      type="text"
+                      th:field="*{nombre}"
+                      class="form-control"
+                      id="nombre"
+                      required
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label for="nombreComercial"
+                      >Ingrese Nombre Comercial :</label
+                    >
+                    <input
+                      type="text"
+                      th:field="*{nombreComercial}"
+                      class="form-control"
+                      id="nombreComercial"
+                      required
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label for="nombreLaboratorio"
+                      >Ingrese Nombre de Laboratorio :</label
+                    >
+                    <input
+                      type="text"
+                      th:field="*{nombreLaboratorio}"
+                      class="form-control"
+                      id="nombreLaboratorio"
+                      required
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label for="fechaVencimiento"
+                      >Ingrese fechaVencimiento :</label
+                    >
+                    <!-- th:field="*{fechaVencimiento}" -->
+                    <input
+                      type="date"
+                      class="form-control"
+                      id="fechaVencimiento"
+                    />
+                  </div>
+                  <button
+                    type="submit"
+                    class="btn btn-primary w-100"
+                    style="border-radius: 15px"
+                  >
+                    Guardar
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-9">
+            <table class="table table-striped">
+              <thead class="">
+                <tr>
+                  <th>Nomble Completo</th>
+                  <th>Nombre Comercial</th>
+                  <th>Nombre Laboratorio</th>
+                  <th>Fecha Vencimiento</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr th:each=" medicamento : ${medicamentos}">
+                  <td th:text="${medicamento.nombre}"></td>
+                  <td th:text="${medicamento.nombreComercial}"></td>
+                  <td th:text="${medicamento.nombreLaboratorio}"></td>
+                  <td th:text="${medicamento.fechaVencimiento}"></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

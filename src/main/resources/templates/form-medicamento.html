@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="helpers/layout::head"> </head>
+
+  <body style="overflow-x: hidden">
+    <nav th:replace="helpers/layout::menu"></nav>
+    <div class="row justify-content-center my-4">
+        <div th:if="${showMsg}" class="alert alert-success alert-dismissible fade show" role="alert">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <strong th:text="${msg}"></strong> 
+        </div>
+        
+        <script>
+          $(".alert").alert();
+        </script>
+      
+        <div class="col-md-10">
+        <div class="row ">
+            <div class="col-md-4 p-4 border shadow-sm border-1 " style="border-radius: 15px;">
+                <h2 class="text-center">Cotizador de Medicamentos</h2>
+                <img th:src="@{/bolsa-de-dinero.png}" alt="" class="text-center img-fluid p-4" />
+                </div>
+            <div class="col-md-8 p-4">
+                <div class="card">
+                    <div class="card-header text-center">Registro de Medicamento</div>
+    
+                    <div class="card-body">
+                    <form
+                        th:action="@{/formulario}"
+                        method="post"
+                        th:object="${medicamentoPrecioNew}"
+                    >
+                        <div class="form-group">
+                        <label for="nombre">Ingrese nombre :</label>
+                        <input
+                            type="text"
+                            th:field="*{nombre}"
+                            class="form-control"
+                            id="nombre"
+                            required
+                        />
+                        </div>
+                        <div class="form-group">
+                            <label for="nombreLaboratorio"
+                            >Ingrese el Precio  :</label
+                            >
+                            <input
+                            type="number"
+                            th:field="*{precio}"
+                            class="form-control"
+                            id="precio"
+                            step=".01"
+                            required
+                            />
+                        </div>
+                        <div class="form-group">
+                        <label for="nombreLaboratorio"
+                            >Ingrese la Cantidad  :</label
+                        >
+                        <input
+                            type="number"
+                            th:field="*{cantidad}"
+                            class="form-control"
+                            id="cantidad"
+                            required
+                        />
+                        </div>
+                        <button
+                        type="submit"
+                        class="btn btn-primary w-100"
+                        style="border-radius: 15px"
+                        >
+                        Guardar
+                        </button>
+                    </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

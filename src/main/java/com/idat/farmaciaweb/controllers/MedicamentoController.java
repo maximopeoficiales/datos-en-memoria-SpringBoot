@@ -14,9 +14,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 @Controller
+@RequestMapping("/medicamentos")
 public class MedicamentoController {
     // esto hace una inyeccion de dependencia seria lo mismo hacer
     // MedicamentoService medicamentoService = new MedicamentoService();
@@ -25,7 +27,7 @@ public class MedicamentoController {
     MedicamentoService medicamentoService;
 
     // Model se usa para enviar variables a las vistas
-    @GetMapping("/medicamentos")
+    @GetMapping
     public String listadoMedicamentos(Model model) {
         List<Medicamento> listMedicamentos = medicamentoService.getMedicamentos();
         // LocalDate.of(1972, Month.MAY, 23)
@@ -34,15 +36,15 @@ public class MedicamentoController {
         return "lista-medicamentos";
     }
 
-    @GetMapping("/medicamentos/details/{id}")
-    public String detallePaciente(Model model, @PathVariable("id") int idMedicamento) {
+    @GetMapping("/details/{id}")
+    public String detalleMedicamento(Model model, @PathVariable("id") int idMedicamento) {
         Medicamento medicamento = medicamentoService.getMedicamento(idMedicamento).map(p -> p).orElse(null);
         model.addAttribute("medicamentoNew", medicamento);
         return "medicamento-detalle";
     }
 
-    @GetMapping("/medicamentos/delete/{id}")
-    public String deletePaciente(Model model, @PathVariable("id") int idMedicamento) {
+    @GetMapping("/delete/{id}")
+    public String deleteMedicamento(Model model, @PathVariable("id") int idMedicamento) {
         Medicamento medicamento = medicamentoService.getMedicamento(idMedicamento).map(p -> p).orElse(null);
         if (medicamento != null) {
             // existe el medicamento
@@ -55,8 +57,8 @@ public class MedicamentoController {
         }
     }
 
-    @PostMapping("/medicamentos")
-    public String guardarPaciente(@ModelAttribute("medicamentoNew") Medicamento medicamentoNew) {
+    @PostMapping
+    public String guardarMedicamento(@ModelAttribute("medicamentoNew") Medicamento medicamentoNew) {
         medicamentoService.save(medicamentoNew);
         // redigire a una url especifica en este caso /medicamentos
         return "redirect:medicamentos";

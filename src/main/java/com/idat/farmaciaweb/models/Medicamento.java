@@ -1,8 +1,5 @@
 package com.idat.farmaciaweb.models;
 
-import java.time.LocalDate;
-// import java.util.Date;
-import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+  <!-- obtengo el layout ubicado en helpers/layout::head  -->
   <head th:replace="helpers/layout::head"> </head>
 
   <body style="overflow-x: hidden">
@@ -10,6 +11,7 @@
           <div class="col-md-4 animate__animated animate__pulse">
             <div class="card">
               <div class="card-header text-center">Listado de Citas</div>
+              <!-- le indica que la imagen www.ejemplo.com/medico.png -->
               <img
                 th:src="@{/medico.png}"
                 alt=""
@@ -18,11 +20,14 @@
                 width="100px"
               />
               <div class="card-body">
+                <!-- la action es la url con la cual se quiere comunicar -->
+                <!-- el objecto citaNew es el objeto vacio que sera rellenado por el usuario -->
                 <form
                   th:action="@{/citas}"
                   method="post"
                   th:object="${citaNew}"
                 >
+                <!-- cada propiedad con th:field le indica que es parte del objeto citaNew -->
                   <div class="form-group">
                     <label for="nombre">Ingrese descripcion :</label>
                     <textarea
@@ -79,6 +84,7 @@
                   <th>Acciones</th>
                 </tr>
               </thead>
+              <!-- se envio una variable 'citas' desde el controlador ahora se recorrera -->
               <tbody>
                 <tr th:each=" cita : ${citas}">
                   <td th:text="${cita.descripcion}"></td>
@@ -86,6 +92,7 @@
                   <td th:text="${cita.paciente.edad}"></td>
                   <td th:text="${cita.fecha}"></td>
                   <td class="d-flex justify-content-center align-items-center">
+                    <!-- se forman los lins apuntando a mi controlador -->
                     <a
                       class="btn btn-primary btn-sm mx-1"
                       th:href="@{'citas/details/' + ${cita.idCita}}"

@@ -24,7 +24,6 @@ public class PacienteController {
     @GetMapping("/pacientes")
     public String listadoPacientes(Model model) {
         List<Paciente> listPacientes = pacienteService.getPacientes();
-        // LocalDate.of(1972, Month.MAY, 23)
         model.addAttribute("pacientes", listPacientes);
         model.addAttribute("pacienteNew", new Paciente());
         return "lista-pacientes";
@@ -32,10 +31,9 @@ public class PacienteController {
 
     @PostMapping("/pacientes")
     public String listadoPacientesPost(@ModelAttribute("pacienteNew") Paciente pacienteNew, Model model) {
-        Paciente newPaciente = new Paciente();
-        newPaciente.setIdPaciente(0);
-        model.addAttribute("pacientes", pacienteService.agregarPaciente(pacienteNew));
-        model.addAttribute("pacienteNew", newPaciente);
+        pacienteService.save(pacienteNew);
+        model.addAttribute("pacientes", pacienteService.getPacientes());
+        model.addAttribute("pacienteNew", new Paciente());
         return "lista-pacientes";
     }
 }

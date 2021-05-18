@@ -33,10 +33,8 @@ public class MedicamentoController {
 
     @PostMapping("/medicamentos")
     public String listadoPacientesPost(@ModelAttribute("medicamentoNew") Medicamento medicamentoNew, Model model) {
-        Medicamento newMedicamento = new Medicamento();
-        newMedicamento.setIdMedicamento(0);
-        medicamentoNew.setFechaVencimiento(LocalDate.of(2023, Month.MAY, 23));
-        model.addAttribute("medicamentos", medicamentoService.agregarMedicamento(medicamentoNew));
+        medicamentoService.save(medicamentoNew);
+        model.addAttribute("medicamentos", medicamentoService.getMedicamentos());
         model.addAttribute("medicamentoNew", new Medicamento());
         return "lista-medicamentos";
     }

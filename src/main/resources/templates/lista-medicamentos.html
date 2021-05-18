@@ -55,8 +55,8 @@
                     <label for="fechaVencimiento"
                       >Ingrese fechaVencimiento :</label
                     >
-                    <!-- th:field="*{fechaVencimiento}" -->
                     <input
+                      th:field="*{fechaVencimiento}"
                       type="date"
                       class="form-control"
                       id="fechaVencimiento"
@@ -81,6 +81,7 @@
                   <th>Nombre Comercial</th>
                   <th>Nombre Laboratorio</th>
                   <th>Fecha Vencimiento</th>
+                  <th>Acciones</th>
                 </tr>
               </thead>
               <tbody>
@@ -89,6 +90,11 @@
                   <td th:text="${medicamento.nombreComercial}"></td>
                   <td th:text="${medicamento.nombreLaboratorio}"></td>
                   <td th:text="${medicamento.fechaVencimiento}"></td>
+                  <td class="d-flex justify-content-center align-items-center">
+                    <a class="btn btn-primary btn-sm mx-1" th:href="@{'medicamentos/details/' + ${medicamento.idMedicamento}}" role="button">Ver</a> 
+
+                    <a class="btn btn-warning btn-sm mx-1" th:href="@{'medicamentos/delete/' + ${medicamento.idMedicamento}}" role="button">Eliminar</a>
+                  </td>
                 </tr>
               </tbody>
             </table>
